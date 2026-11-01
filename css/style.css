@@ -1,0 +1,54 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100vh;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+aside#containerMenusLaterais {
+    color: white;
+    width: 300px;
+    background-color: black;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+aside#containerMenusLaterais header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    height: 52px;
+}
+
+nav#navBar {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+nav .botaoMenuLateral {
+    background-color: grey;
+    padding: 12px;
+    font-size: 1rem;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
