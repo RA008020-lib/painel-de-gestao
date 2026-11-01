@@ -1,7 +1,13 @@
 import { carregaMenusLaterais } from "./router.js";
 
-function initApp() {
+async function initApp() {
     carregaMenusLaterais();
+
+    /*TEMPORARIO*/
+    const pagCadastro = await fetch('../pages/cadastro.html');
+    document.getElementById('viewerPagina').innerHTML = await pagCadastro.text()
+    /*TEMPORARIO*/
+
 }
 
 initApp();

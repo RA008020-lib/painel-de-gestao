@@ -52,3 +52,8 @@ nav .botaoMenuLateral {
     outline: none;
     cursor: pointer;
 }
+
+main#viewerPagina {
+    height: 100vh;
+    padding-left: 300px;
+}

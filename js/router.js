@@ -10,11 +10,6 @@ const ROTAS_APP = [
         titulo: 'Reports',
         chave: 'reports',
         ativa: true
-    },
-    {
-        titulo: 'Reports',
-        chave: 'reports',
-        ativa: true
     }
 ]
 
@@ -31,7 +26,7 @@ export function carregaMenusLaterais() {
             carregaPagina(rota)
         }
         navBar.append(button);
-    }).join('')
+    })
 }
 
 async function carregaPagina(rota) {
