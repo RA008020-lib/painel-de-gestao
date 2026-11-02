@@ -1,59 +1,756 @@
+/* ==========================================================================
+   PETEC — Painel de Gestão Administrativa (Casca & Menu Lateral SPA)
+   Design System: Regra 60-30-10 + Brutalismo Estrutural
+   Padrão de Nomenclatura: camelCase descritivo em português
+   ========================================================================== */
+
+:root {
+    /* Paleta Institucional PETEC */
+    --azul-institucional: #0A2540;
+    --azul-superficie: #0F3156;
+    --azul-profundo: #06182C;
+    --amarelo-otimista: #F4B41A;
+    --amarelo-hover: #E0A312;
+    --vermelho-alerta: #DC2626;
+
+    /* Superfícies e Neutros */
+    --branco-puro: #FFFFFF;
+    --preto-solido: #111827;
+    --cinza-interface: #F3F4F6;
+    --cinza-borda: #E5E7EB;
+    --cinza-texto-apoio: #9CA3AF;
+
+    /* Cores Semânticas */
+    --verde-online: #16A34A;
+
+    /* Tipografia */
+    --fonte-impacto: 'Anton', sans-serif;
+    --fonte-interface: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Dimensões da Casca */
+    --largura-menu-lateral: 280px;
+    --largura-menu-recolhido: 84px;
+    --altura-barra-superior: 82px;
+    --tamanho-item-menu: 48px;
+
+    /* Curvas de Animação */
+    --curva-saida-suave: cubic-bezier(0.16, 1, 0.3, 1);
+    --curva-mola: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==========================================================================
+   Reset e Estrutura Base
+   ========================================================================== */
 *,
 *::after,
 *::before {
     box-sizing: border-box;
-    border: none;
     padding: 0;
     margin: 0;
 }
 
 html,
 body {
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--azul-institucional);
+    color: var(--branco-puro);
+    font-family: var(--fonte-interface);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
 }
 
-aside#containerMenusLaterais {
-    color: white;
-    width: 300px;
-    background-color: black;
+/* Marca d'Água Institucional no Canto Inferior Direito */
+#marcaDaguaPetec {
     position: fixed;
+    bottom: 18px;
+    right: 28px;
+    font-family: var(--fonte-impacto);
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+    color: var(--branco-puro);
+    opacity: 0.04;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+/* ==========================================================================
+   Menu Lateral (aside#containerMenusLaterais)
+   ========================================================================== */
+aside#containerMenusLaterais {
+    color: var(--branco-puro);
+    width: var(--largura-menu-lateral);
+    background-color: var(--azul-profundo);
+    border-right: 4px solid var(--amarelo-otimista);
+    box-shadow: 8px 0 28px rgba(0, 0, 0, 0.45);
+    position: fixed;
+    top: 0;
     left: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 8px;
+    padding: 18px 16px;
+    gap: 14px;
+    z-index: 1050;
+    overflow: hidden;
+    transition: width 0.38s var(--curva-saida-suave), transform 0.38s var(--curva-saida-suave), padding 0.38s var(--curva-saida-suave);
 }
 
-aside#containerMenusLaterais header {
+/* Cabeçalho do Menu Lateral */
+aside#containerMenusLaterais header.cabecalhoMenuLateral {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 4px;
-    height: 52px;
+    justify-content: flex-start;
+    gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    min-height: 64px;
+    overflow: hidden;
 }
 
+.identidadeMenuLateral {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 200px;
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+        opacity 0.22s ease,
+        transform 0.32s var(--curva-saida-suave),
+        max-width 0.38s var(--curva-saida-suave);
+}
+
+.subtituloOngMenuLateral {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--amarelo-otimista);
+}
+
+aside#containerMenusLaterais header h2 {
+    font-family: var(--fonte-impacto);
+    font-size: 1.65rem;
+    letter-spacing: 1px;
+    color: var(--branco-puro);
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* Botões Quadrados do Cabeçalho do Menu Lateral */
+.btnQuadrado {
+    width: var(--tamanho-item-menu);
+    height: var(--tamanho-item-menu);
+    min-width: var(--tamanho-item-menu);
+    flex-shrink: 0;
+    background-color: var(--azul-superficie);
+    color: var(--branco-puro);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s var(--curva-saida-suave);
+}
+
+button.btnQuadrado:hover {
+    background-color: var(--amarelo-otimista);
+    color: var(--preto-solido);
+    border-color: var(--preto-solido);
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0px var(--branco-puro);
+}
+
+
+/* Navegação Principal (nav#navBar) */
 nav#navBar {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 10px;
     flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px 0;
 }
 
 nav .botaoMenuLateral {
-    background-color: grey;
-    padding: 12px;
-    font-size: 1rem;
-    color: white;
-    outline: none;
+    width: 100%;
+    height: var(--tamanho-item-menu);
+    min-height: var(--tamanho-item-menu);
+    background-color: var(--azul-superficie);
+    color: var(--branco-puro);
+    border: 2px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: 0 12px 0 0;
+    font-family: var(--fonte-interface);
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
     cursor: pointer;
+    outline: none;
+    text-align: left;
+    overflow: hidden;
+    transition:
+        background-color 0.22s var(--curva-saida-suave),
+        border-color 0.22s var(--curva-saida-suave),
+        transform 0.22s var(--curva-saida-suave),
+        box-shadow 0.22s var(--curva-saida-suave),
+        padding 0.35s var(--curva-saida-suave),
+        gap 0.35s var(--curva-saida-suave);
+    position: relative;
 }
 
+nav .botaoMenuLateral .iconeBotaoMenuLateral {
+    font-size: 1.2rem;
+    color: var(--amarelo-otimista);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    min-width: 44px;
+    height: 100%;
+    flex-shrink: 0;
+    transition: transform 0.2s var(--curva-mola), color 0.2s ease;
+}
+
+nav .botaoMenuLateral .textoBotaoMenuLateral {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+        opacity 0.2s ease,
+        transform 0.32s var(--curva-saida-suave),
+        max-width 0.38s var(--curva-saida-suave);
+}
+
+/* Hover do Botão Lateral */
+nav .botaoMenuLateral:hover {
+    border-color: var(--amarelo-otimista);
+    background-color: #133c68;
+}
+
+/* Estado Ativo (Página Selecionada — Brutalismo Amarelo Otimista) */
+nav .botaoMenuLateral.ativo {
+    background-color: var(--amarelo-otimista);
+    color: var(--preto-solido);
+    border-color: var(--branco-puro);
+    font-weight: 800;
+}
+
+nav .botaoMenuLateral.ativo .iconeBotaoMenuLateral {
+    color: var(--preto-solido);
+    transform: scale(1.08);
+}
+
+/* Rodapé do Menu Lateral */
+aside#containerMenusLaterais footer.rodapeMenuLateral {
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    padding-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.cartaoPerfilAdmin {
+    width: 100%;
+    height: var(--tamanho-item-menu);
+    min-height: var(--tamanho-item-menu);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    padding: 0 12px 0 0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition:
+        padding 0.35s var(--curva-saida-suave),
+        gap 0.35s var(--curva-saida-suave),
+        background-color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.iconeAvatarAdmin {
+    width: 44px;
+    min-width: 44px;
+    height: 100%;
+    flex-shrink: 0;
+    color: var(--amarelo-otimista);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.dadosPerfilAdmin {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 180px;
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+        opacity 0.2s ease,
+        transform 0.32s var(--curva-saida-suave),
+        max-width 0.38s var(--curva-saida-suave);
+}
+
+.dadosPerfilAdmin strong {
+    font-size: 0.85rem;
+    color: var(--branco-puro);
+    line-height: 1.2;
+}
+
+.dadosPerfilAdmin span {
+    font-size: 0.72rem;
+    color: var(--cinza-texto-apoio);
+    line-height: 1.2;
+}
+
+.botaoSairSistema {
+    width: 100%;
+    height: var(--tamanho-item-menu);
+    min-height: var(--tamanho-item-menu);
+    padding: 0 12px 0 0;
+    border-radius: 10px;
+    border: 2px solid rgba(220, 38, 38, 0.6);
+    background-color: rgba(220, 38, 38, 0.12);
+    color: #FCA5A5;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition:
+        background-color 0.2s var(--curva-saida-suave),
+        border-color 0.2s var(--curva-saida-suave),
+        color 0.2s var(--curva-saida-suave),
+        transform 0.2s var(--curva-saida-suave),
+        box-shadow 0.2s var(--curva-saida-suave),
+        padding 0.35s var(--curva-saida-suave),
+        gap 0.35s var(--curva-saida-suave);
+}
+
+.botaoSairSistema i {
+    width: 44px;
+    min-width: 44px;
+    height: 100%;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+}
+
+.botaoSairSistema span {
+    max-width: 160px;
+    opacity: 1;
+    transform: translateX(0);
+    overflow: hidden;
+    transition:
+        opacity 0.2s ease,
+        transform 0.32s var(--curva-saida-suave),
+        max-width 0.38s var(--curva-saida-suave);
+}
+
+.botaoSairSistema:hover {
+    background-color: var(--vermelho-alerta);
+    border-color: var(--branco-puro);
+    color: var(--branco-puro);
+}
+
+/* ==========================================================================
+   Modo Menu Lateral Recolhido (Desktop — Fechamento por Cima sem Pulo)
+   ========================================================================== */
+body.menuLateralRecolhido aside#containerMenusLaterais {
+    width: var(--largura-menu-recolhido);
+    padding: 18px 16px;
+}
+
+body.menuLateralRecolhido .identidadeMenuLateral,
+body.menuLateralRecolhido .botaoMenuLateral .textoBotaoMenuLateral,
+body.menuLateralRecolhido .dadosPerfilAdmin,
+body.menuLateralRecolhido .botaoSairSistema span {
+    opacity: 0;
+    max-width: 0;
+    transform: translateX(-10px);
+    pointer-events: none;
+}
+
+body.menuLateralRecolhido aside#containerMenusLaterais header.cabecalhoMenuLateral,
+body.menuLateralRecolhido nav .botaoMenuLateral,
+body.menuLateralRecolhido .cartaoPerfilAdmin,
+body.menuLateralRecolhido .botaoSairSistema {
+    gap: 0;
+    padding-right: 0;
+}
+
+body.menuLateralRecolhido header#tituloPagina,
+body.menuLateralRecolhido main#viewerPagina {
+    padding-left: calc(var(--largura-menu-recolhido) + 32px);
+}
+
+/* ==========================================================================
+   Barra Superior de Contexto (header#tituloPagina)
+   ========================================================================== */
+header#tituloPagina.barraSuperiorGestao {
+    min-height: var(--altura-barra-superior);
+    background-color: var(--branco-puro);
+    color: var(--azul-institucional);
+    border-bottom: 4px solid var(--amarelo-otimista);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    padding: 14px 32px 14px calc(var(--largura-menu-lateral) + 32px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    transition: padding-left 0.35s var(--curva-saida-suave);
+}
+
+.blocoEsquerdoBarraSuperior {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.botaoGatilhoMenuMobile {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    border: 2px solid var(--azul-institucional);
+    background-color: var(--cinza-interface);
+    color: var(--azul-institucional);
+    font-size: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px var(--azul-institucional);
+}
+
+.textosTituloPagina {
+    display: flex;
+    flex-direction: column;
+}
+
+.trilhaNavegacaoRota {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #4B5563;
+}
+
+header#tituloPagina h1 {
+    font-family: var(--fonte-impacto);
+    font-size: 1.9rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--azul-institucional);
+    line-height: 1.1;
+    margin: 2px 0 0;
+}
+
+.seloEcossistemaTopo {
+    background-color: var(--azul-institucional);
+    color: var(--amarelo-otimista);
+    border: 2px solid var(--preto-solido);
+    box-shadow: 3px 3px 0px var(--amarelo-otimista);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   Área Principal de Visualização de Páginas (main#viewerPagina)
+   ========================================================================== */
 main#viewerPagina {
-    height: 100vh;
-    padding-left: 300px;
+    min-height: calc(100vh - var(--altura-barra-superior));
+    padding: 32px 32px 48px calc(var(--largura-menu-lateral) + 32px);
+    position: relative;
+    z-index: 1;
+    transition: padding-left 0.35s var(--curva-saida-suave);
+}
+
+.containerConteudoPagina {
+    width: 100%;
+    max-width: 1280px;
+}
+
+.animacaoEntradaPagina {
+    animation: entradaSuavePagina 0.38s var(--curva-saida-suave) forwards;
+}
+
+@keyframes entradaSuavePagina {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   Estados do Roteador: Esqueleto de Carregamento e Aviso de Módulo
+   ========================================================================== */
+.containerCarregamentoPagina {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.cabecalhoCarregamentoPagina {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+    color: var(--amarelo-otimista);
+}
+
+.iconeGiratorioCarregamento {
+    display: inline-block;
+    animation: giroContinuo 1s linear infinite;
+}
+
+.cartaoEsqueletoCarregamento {
+    background-color: var(--branco-puro);
+    border: 2px solid var(--branco-puro);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.55);
+}
+
+.linhaEsqueleto,
+.blocoEsqueleto {
+    background: linear-gradient(90deg, #E5E7EB 25%, #F3F4F6 50%, #E5E7EB 75%);
+    background-size: 200% 100%;
+    animation: brilhoEsqueleto 1.4s infinite linear;
+    border-radius: 8px;
+}
+
+.linhaEsqueleto {
+    height: 24px;
+    margin-bottom: 16px;
+}
+
+.larguraEsqueleto40 {
+    width: 40%;
+    height: 34px;
+}
+
+.larguraEsqueleto80 {
+    width: 75%;
+}
+
+.gradeEsqueletoCarregamento {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.blocoEsqueleto {
+    height: 140px;
+}
+
+@keyframes brilhoEsqueleto {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@keyframes giroContinuo {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Cartão de Aviso quando uma página ainda não foi criada na pasta /pages */
+.cartaoAvisoModulo {
+    background-color: var(--branco-puro);
+    color: var(--preto-solido);
+    border: 3px solid var(--preto-solido);
+    border-radius: 16px;
+    box-shadow: 8px 8px 0px var(--amarelo-otimista);
+    padding: 44px 32px;
+    max-width: 640px;
+    margin: 24px auto;
+    text-align: center;
+}
+
+.caixaIconeAvisoModulo {
+    width: 68px;
+    height: 68px;
+    border-radius: 14px;
+    background-color: var(--azul-institucional);
+    color: var(--amarelo-otimista);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 16px;
+    box-shadow: 4px 4px 0px var(--amarelo-otimista);
+}
+
+.seloStatusModulo {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 10px;
+    background-color: var(--cinza-interface);
+    color: var(--azul-institucional);
+    border: 1.5px solid var(--azul-institucional);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.cartaoAvisoModulo h2 {
+    font-family: var(--fonte-impacto);
+    font-size: 2.2rem;
+    color: var(--azul-institucional);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+}
+
+.cartaoAvisoModulo p {
+    color: #4B5563;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
+}
+
+.grupoBotoesAvisoModulo {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.botaoAcaoPrimario,
+.botaoAcaoSecundario {
+    font-family: var(--fonte-interface);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s var(--curva-saida-suave);
+}
+
+.botaoAcaoPrimario {
+    background-color: var(--amarelo-otimista);
+    color: var(--preto-solido);
+    border: 2px solid var(--preto-solido);
+    box-shadow: 4px 4px 0px var(--preto-solido);
+}
+
+.botaoAcaoPrimario:hover {
+    background-color: var(--amarelo-hover);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--preto-solido);
+}
+
+.botaoAcaoSecundario {
+    background-color: var(--azul-institucional);
+    color: var(--branco-puro);
+    border: 2px solid var(--azul-institucional);
+}
+
+.botaoAcaoSecundario:hover {
+    background-color: var(--azul-superficie);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px var(--amarelo-otimista);
+}
+
+/* ==========================================================================
+   Responsividade Mobile & Tablet (Gaveta do Menu Lateral)
+   ========================================================================== */
+.fundoEscuroMenuLateral {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(6, 24, 44, 0.72);
+    backdrop-filter: blur(3px);
+    z-index: 1040;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+@media (max-width: 991px) {
+    aside#containerMenusLaterais {
+        transform: translateX(-100%);
+        width: var(--largura-menu-lateral) !important;
+    }
+
+    body.menuMobileAberto aside#containerMenusLaterais {
+        transform: translateX(0);
+    }
+
+    body.menuMobileAberto .fundoEscuroMenuLateral {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    header#tituloPagina.barraSuperiorGestao,
+    body.menuLateralRecolhido header#tituloPagina.barraSuperiorGestao {
+        padding: 14px 20px;
+    }
+
+    main#viewerPagina,
+    body.menuLateralRecolhido main#viewerPagina {
+        padding: 24px 20px 40px;
+    }
+
+    .botaoGatilhoMenuMobile {
+        display: inline-flex;
+    }
+
+    .seloEcossistemaTopo {
+        display: none;
+    }
 }

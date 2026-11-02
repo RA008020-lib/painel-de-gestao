@@ -4,28 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Gestão</title>
-    <script type="module" src="../js/app.js"></script>
+    <title>PETEC — Painel de Gestão | Anjos de Resgate</title>
+    <!-- Fontes & Ícones do Design System PETEC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/app.js"></script>
 </head>
 
 <body>
-    <header id="tituloPagina"></header>
-    <aside id="containerMenusLaterais">
-        <header>
-            <div class="btnQuadrado">BTN</div>
-            <h2>PLAT.GESTAO</h2>
-            <div class="btnQuadrado"></div>
-        </header>
-        <nav id="navBar">
-        </nav>
-        <footer>
+    <!-- Fundo escurecido para fechar o menu lateral em telas menores -->
+    <div id="fundoEscuroMenuLateral" class="fundoEscuroMenuLateral" aria-hidden="true"></div>
 
+    <!-- Menu Lateral -->
+    <aside id="containerMenusLaterais" aria-label="Menu Principal de Gestão">
+        <header class="cabecalhoMenuLateral">
+            <button id="btnAlternarMenuLateral" type="button" class="btnQuadrado" title="Recolher / Expandir Menu"
+                aria-label="Alternar menu lateral">
+                <i class="fi fi-rr-menu-burger"></i>
+            </button>
+            <div class="identidadeMenuLateral">
+                <span class="subtituloOngMenuLateral">Anjos de Resgate</span>
+                <h2>ADMINISTRATIVO</h2>
+            </div>
+        </header>
+
+        <nav id="navBar" role="navigation" aria-label="Navegação de páginas">
+            <!-- Botões gerados dinamicamente pelo router.js -->
+        </nav>
+
+        <footer class="rodapeMenuLateral">
+            <div class="cartaoPerfilAdmin">
+                <div class="iconeAvatarAdmin">
+                    <i class="fi fi-rr-shield-check"></i>
+                </div>
+                <div class="dadosPerfilAdmin">
+                    <strong>Administrador</strong>
+                    <span>ONG Anjos de Resgate</span>
+                </div>
+            </div>
+            <a href="../index.html" class="botaoSairSistema" title="Sair para a tela de login">
+                <i class="fi fi-rr-exit"></i>
+                <span>Sair</span>
+            </a>
         </footer>
     </aside>
-    <main id="viewerPagina">
 
+    <!-- Cabeçalho Superior da Área de Conteúdo -->
+    <header id="tituloPagina" class="barraSuperiorGestao">
+        <div class="blocoEsquerdoBarraSuperior">
+            <button id="btnAbrirMenuMobile" type="button" class="botaoGatilhoMenuMobile" aria-label="Abrir Menu">
+                <i class="fi fi-rr-menu-burger"></i>
+            </button>
+            <div class="textosTituloPagina">
+                <span id="caminhoNavegacaoRota" class="trilhaNavegacaoRota">Painel Administrativo / Início</span>
+                <h1 id="nomePaginaAtual">Carregando...</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container Dinâmico das Páginas do SPA -->
+    <main id="viewerPagina" role="main" aria-live="polite">
+        <!-- Conteúdo das páginas é injetado aqui com segurança pelo router.js -->
     </main>
+
+    <!-- Marca d'Água Institucional PETEC -->
+    <div id="marcaDaguaPetec" aria-hidden="true">PETEC • GESTÃO</div>
 </body>
 
 </html>
