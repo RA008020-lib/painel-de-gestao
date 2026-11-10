@@ -1,60 +1,92 @@
-<!--TELA DO JOAO-->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link ref="stylesheet" href="#">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadastro de Animais</title>
+<link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-    <header>
-        <div class="principal">
-            <h1>Anjos de Resgate</h1>
+  <h1>Cadastro de Animais</h1>
+
+  <section class="cartao">
+    <div id="feedbackFormPet" role="status" hidden></div>
+
+    <form id="formCadastroPet" novalidate>
+      <input type="hidden" id="petIdEdicao" value="">
+
+      <div class="linha">
+        <div>
+          <label for="petNome">Nome do animal *</label>
+          <input type="text" id="petNome" maxlength="100" required placeholder="Ex: Thor">
         </div>
-    </header>
+      </div>
+
+      <div class="linha col-2">
+        <div>
+          <label for="petEspecie">Espécie *</label>
+          <select id="petEspecie" required>
+            <option value="cao">Cão</option>
+            <option value="gato">Gato</option>
+          </select>
+        </div>
+        <div>
+          <label for="petRaca">Raça</label>
+          <input type="text" id="petRaca" maxlength="100" value="SRD" placeholder="SRD">
+        </div>
+      </div>
+
+      <div class="linha col-2">
+        <div>
+          <label for="petSexo">Sexo *</label>
+          <select id="petSexo" required>
+            <option value="macho">Macho</option>
+            <option value="femea">Fêmea</option>
+          </select>
+        </div>
+        <div>
+          <label for="petPorte">Porte *</label>
+          <select id="petPorte" required>
+            <option value="pequeno">Pequeno</option>
+            <option value="medio" selected>Médio</option>
+            <option value="grande">Grande</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="linha col-2">
+        <div>
+          <label for="petIdade">Idade aproximada, em anos (0 para filhote) *</label>
+          <input type="number" id="petIdade" min="0" max="30" value="1" required>
+        </div>
+        <div>
+          <label for="petFotoArquivo">Foto do animal</label>
+          <input type="file" id="petFotoArquivo" accept="image/jpeg,image/png,image/webp">
+          <input type="hidden" id="petFotoAtual" value="">
+          <small id="statusFotoPet">JPEG, PNG ou WEBP, até 5 MB.</small>
+        </div>
+      </div>
+
+      <div class="linha">
+        <div>
+          <label>Saúde</label>
+          <div class="saude">
+            <label><input type="checkbox" id="petVacinado" checked> Vacinado</label>
+            <label><input type="checkbox" id="petVermifugado" checked> Vermifugado</label>
+            <label><input type="checkbox" id="petCastrado"> Castrado</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="linha">
+        <div>
+          <label for="petHistorico">Histórico e comportamento</label>
+          <textarea id="petHistorico" rows="4" maxlength="500" placeholder="Relato do resgate, temperamento e recomendações..."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" id="btnSalvarPet">Salvar animal</button>
+    </form>
+  </section>
 </body>
-    <div class="cadastro">
-        <span><h2>Cadastro dos animais</h2></span>
-        <!-- Tive a ideia de colocar a logo centralizada -->
-        <div class="#">
-            <label>Id </label>
-            <input>
-        </div> <!--Padronizei as div em class assim para ficar mais facil para o css (Não sei se está correto Felipe).-->
-        <div class="#">
-            <label>Raça </label>
-            <input>
-        </div>
-        <div class="#">
-            <label for="sexo">Sexo </label> 
-            <select id="sexo" name="sexo">
-                <option value="">Selecione</option>
-                <option value="M">Macho</option>
-                <option value="MC">Macho Castrado</option>
-                <option value="F">Fêmea</option>
-                <option value="FC">Fêmea Castrada</option>
-            </select>
-        </div>
-        <div class="#">
-            <label for="porte">Porte </label>
-            <select id="porte" name="porte">
-                <option value="">Selecione</option>
-                <option value="P">Pequeno</option>
-                <option value="M">Médio</option>
-                <option value="G">Grande</option>
-            </select>
-        </div>
-        <div class="#"> <!--Pode ser retirado, peguei de exemplo para caso for adotado já tem algo informando-->
-            <label>Proprietário</label>
-            <input>
-        </div>
-        <div class="#">
-            <label>Observações </label>
-            <br><input>
-        </div> <!--Quero fazer uma caixa grande para ter descrições, sobre algo do cachorro-->
-        <div class="#">
-            <label>Data de Cadastro</label>
-            <input type="date"></div>
-    </div>
 </html>
-<div>OLAH O CADASTRO QUE LEGAL</div>
