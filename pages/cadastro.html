@@ -8,12 +8,23 @@
     <link ref="stylesheet" href="#">
 </head>
 <body>
-    <header>Tela de Cadastro</header>
+    <header>
+        <div class="principal">
+            <h1>Anjos de Resgate</h1>
+        </div>
+    </header>
 </body>
     <div class="cadastro">
-        <h2>Cadastro dos animais</h2>
-        <div class="#"><label>Id </label><input></div> <!--Padronizei as div em class assim para ficar mais facil para o css (Não sei se está correto Felipe).-->
-        <div class="#"><label>Raça </label><input></div>
+        <span><h2>Cadastro dos animais</h2></span>
+        <!-- Tive a ideia de colocar a logo centralizada -->
+        <div class="#">
+            <label>Id </label>
+            <input>
+        </div> <!--Padronizei as div em class assim para ficar mais facil para o css (Não sei se está correto Felipe).-->
+        <div class="#">
+            <label>Raça </label>
+            <input>
+        </div>
         <div class="#">
             <label for="sexo">Sexo </label> 
             <select id="sexo" name="sexo">
@@ -33,8 +44,17 @@
                 <option value="G">Grande</option>
             </select>
         </div>
-        <div class="#"><label>Proprietário </label><input></div>
-        <div class="observações"><label><br>Observações </label></div>
+        <div class="#"> <!--Pode ser retirado, peguei de exemplo para caso for adotado já tem algo informando-->
+            <label>Proprietário</label>
+            <input>
+        </div>
+        <div class="#">
+            <label>Observações </label>
+            <br><input>
+        </div> <!--Quero fazer uma caixa grande para ter descrições, sobre algo do cachorro-->
+        <div class="#">
+            <label>Data de Cadastro</label>
+            <input type="date"></div>
     </div>
 </html>
 <div>OLAH O CADASTRO QUE LEGAL</div>
